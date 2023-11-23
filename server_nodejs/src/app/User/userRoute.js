@@ -5,4 +5,10 @@ module.exports = function(app){
     // 0. 테스트 API
      app.get('/app/test', user.getTest)
 
+     // 1. 유저 조회 API (+검색)
+     app.get('/app/users',  user.getUsers);
+
+     // 2. 유저 생성 API
+     app.post('/app/users', user.postUsers);
+
 };
