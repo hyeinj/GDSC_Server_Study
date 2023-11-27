@@ -18,3 +18,11 @@ exports.retrieveUserList = async function(email){
         return userListResult;
     }
 };
+
+exports.emailCheck = async function(email){
+    const connection = await pool.getConnection(async (conn) => conn);
+    const emailCheckResult = await userDao.selectUserEmail(connection, email);
+    connection.release();
+
+    return emailCheckResult;
+};
