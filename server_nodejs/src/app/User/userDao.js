@@ -14,7 +14,9 @@ async function selectUserEmail(connection, email){
 
 // 유저 생성
 async function insertUserInfo(connection, insertUserInfoParams){
-    const inserUser = ``;
+    const insertUserInfoQuery = `INSERT INTO User(username, userID, password, email) VALUES (?, ?, ?, ?, ?);`;
+    const insertUserInfoRow = await connection.query(insertUserInfoQuery, insertUserInfoParams);
+    return insertUserInfoRow;
 }
 
 module.exports = {
