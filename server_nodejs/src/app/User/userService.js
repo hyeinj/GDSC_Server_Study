@@ -60,7 +60,7 @@ exports.postLogin = async function (email, password){
         .digest("hex")
 
         const selectUserPasswordParams = [selectEmail, hashedPassword];
-        const passwordRows = await userProvider.passwrodCheck(selectUserPasswordParams);
+        const passwordRows = await userProvider.passwordCheck(selectUserPasswordParams);
 
         if(passwordRows[0].u_pw !== hashedPassword){
             return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
@@ -69,9 +69,10 @@ exports.postLogin = async function (email, password){
         //계정 상태 확인
         const userInfoRows = await userProvider.accountCheck(email);
 
-        if(userInfoRows[0].status == 0){
+        // state == 1 : 활동중인 상태
+        if(userInfoRows[0].status == 0){ // 정지상태
             return errResponse(baseResponse.SIGNIN_INACTIVE_ACCOUNT);
-        } else if(userInfoRows[0].status == 2){
+        } else if(userInfoRows[0].status == 2){ // 보류 상태
             return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
         }
 
