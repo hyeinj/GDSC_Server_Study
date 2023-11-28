@@ -69,3 +69,18 @@ exports.postUsers = async function(req, res){
     return res.send(signUpResponse);
 
 };
+
+ /**
+ * API No. 3
+ * API Name : 로그인 API
+ * [POST] /app/login
+ */
+
+ exports.login = async function(req, res) {
+    const {email, password} = req.body;
+
+    //email, password 형식적 Validation
+    const loginResponse = await userService.postLogin(email, password);
+
+    return res.send(loginResponse);
+ };

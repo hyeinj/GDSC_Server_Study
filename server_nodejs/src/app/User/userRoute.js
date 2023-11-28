@@ -11,4 +11,7 @@ module.exports = function(app){
      // 2. 유저 생성 API
      app.post('/app/users', user.postUsers);
 
+     // 3. 로그인 API
+     app.post('/app/login', user.login);
+
 };
