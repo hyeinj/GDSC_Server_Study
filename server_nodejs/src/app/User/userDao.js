@@ -50,4 +50,5 @@ module.exports = {
     insertUserInfo,
     selectUserPassword,
     selectUserAccount,
+    updateRefreshToken
 };
