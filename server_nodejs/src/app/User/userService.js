@@ -51,7 +51,7 @@ exports.postLogin = async function (email, password){
         const emailRows = await userProvider.emailCheck(email);
         if (emailRows.length < 1) return errResponse(baseResponse.SIGNIN_EMAIL_WRONG);
 
-        const selectEmail = emailRows[0].u_email
+        const selectEmail = emailRows[0].email
 
         // 비밀번호 확인
         const hashedPassword = await crypto
@@ -62,7 +62,7 @@ exports.postLogin = async function (email, password){
         const selectUserPasswordParams = [selectEmail, hashedPassword];
         const passwordRows = await userProvider.passwordCheck(selectUserPasswordParams);
 
-        if(passwordRows[0].u_pw !== hashedPassword){
+        if(passwordRows[0].password !== hashedPassword){
             return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
         }
 
