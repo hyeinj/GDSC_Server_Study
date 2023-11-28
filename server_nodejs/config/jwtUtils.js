@@ -35,4 +35,34 @@ const jwtMiddleware = (req, res, next) => {
     }).catch(onError)
 };
 
-module.exports = jwtMiddleware;
+const makeAccessToken = (Object) => {
+    let token = jwt.sign(
+        {
+            userId: Object,
+        }, //토큰의 내용(payload)
+        secret_config.jwtsecret, //비밀키
+        {
+            expiresIn: "2m",
+            subject: "userInfo",
+        } // 유효 기간 2분
+    );
+    return token;
+};
+
+const makeRefreshToken = () => {
+    let token = jwt.sign(
+        {},
+        secret_config.jwtsecret,//비밀키
+        {
+            expiresIn: "10d",
+            subject: "userInfo"
+        } // 유효 기간 10일
+    );
+    return token;
+};
+
+module.exports = {
+    jwtMiddleware,
+    makeAccessToken,
+    makeRefreshToken
+};
