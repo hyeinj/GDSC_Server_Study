@@ -99,3 +99,19 @@ exports.postLogin = async function (email, password){
         return errResponse(baseResponse.DB_ERROR);
     }
 };
+
+// menu 추가
+exports.registerMenu = async function(name, price){
+    try{
+        const registerMenuInfoParams = [name, price];
+        const connection = await pool.getConnection(async (conn) => conn);
+
+        const menuIdResult = await userDao.registerMenu(connection, registerMenuInfoParams);
+        console.log(`추가된 메뉴 : ${menuIdResult[0].insertId}`);
+        connection.release();
+        return response(baseResponse.SUCCESS);
+    } catch(err){
+        logger.error(`App - registerMenu Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};

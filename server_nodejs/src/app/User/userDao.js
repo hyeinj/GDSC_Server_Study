@@ -58,6 +58,13 @@ async function selectMenuByName(connection, name){
     return menuRows;
 }
 
+// 메뉴 생성
+async function registerMenu(connection, registerMenuInfoParams){
+    const insertMenuInfoQuery = `INSERT INTO Menu(name, price) VALUES (?, ?);`;
+    const insertMenuInfoRow = await connection.query(insertMenuInfoQuery, registerMenuInfoParams);
+    return insertMenuInfoRow;
+}
+
 module.exports = {
     selectUser,
     selectUserEmail,
@@ -66,5 +73,6 @@ module.exports = {
     selectUserAccount,
     updateRefreshToken,
     selectMenu,
-    selectMenuByName
+    selectMenuByName,
+    registerMenu
 };
