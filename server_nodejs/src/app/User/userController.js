@@ -103,3 +103,28 @@ exports.postUsers = async function(req, res){
         return res.send(response(baseResponse.SUCCESS, menuResultByName));
     }
  };
+
+ /**
+ * API No. 5
+ * API Name : 메뉴 추가 API
+ * [POST] /app/menu
+ */
+exports.postMenu = async function(req, res){
+    // Body : name, price
+    const {name, price} = req.body;
+
+    // 빈 값 체크
+    if(!name){
+        return res.send(response(baseResponse.MENU_NAME_EMPTY));
+    }
+    if(!price){
+        return res.send(response(baseResponse.MENU_PRICE_EMPTY));
+    }
+
+    const menuRegisterResponse = await userService.registerMenu(
+        name,
+        price
+    );
+
+    return res.send(menuRegisterResponse);
+};
