@@ -44,11 +44,27 @@ async function updateRefreshToken(connection, updateRefreshTokenParams) {
     return udpateRefreshTokenRow;
 }
 
+// 모든 메뉴 조회
+async function selectMenu(connection) {
+    const selectMenuListQuery = `SELECT name, price FROM Menu;`;
+    const [menuRows] = await connection.query(selectMenuListQuery);
+    return menuRows;
+}
+
+// 메뉴 이름으로 특정 메뉴 조회
+async function selectMenuByName(connection, name){
+    const selectMenuNameQuery = `SELECT name, price FROM Menu where name = ? ;`;
+    const [menuRows] = await connection.query(selectMenuNameQuery, name);
+    return menuRows;
+}
+
 module.exports = {
     selectUser,
     selectUserEmail,
     insertUserInfo,
     selectUserPassword,
     selectUserAccount,
-    updateRefreshToken
+    updateRefreshToken,
+    selectMenu,
+    selectMenuByName
 };

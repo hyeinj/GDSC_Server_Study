@@ -44,3 +44,19 @@ exports.accountCheck = async function(email){
 
     return userAccountResult;
 };
+
+exports.searchMenuList = async function(name){
+    if(!name){
+        const connection = await pool.getConnection(async (conn) => conn);
+        const menuListResult = await userDao.selectMenu(connection);
+        connection.release();
+
+        return menuListResult;
+    } else{
+        const connection = await pool.getConnection(async (conn) => conn);
+        const menuListResult = await userDao.selectMenuByName(connection, name);
+        connection.release();
+
+        return menuListResult;
+    }
+};
