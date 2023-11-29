@@ -14,4 +14,6 @@ module.exports = function(app){
      // 3. 로그인 API
      app.post('/app/login', user.login);
 
+     // 4. 메뉴 조회 API (+검색)
+     app.get('/app/menu', user.getMenu);
 };

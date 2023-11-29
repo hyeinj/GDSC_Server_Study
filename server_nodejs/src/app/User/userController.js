@@ -43,8 +43,8 @@ exports.getUsers = async function(req, res){
  * [POST] /app/users
  */
 exports.postUsers = async function(req, res){
-    // Body : username, userID, password, email
-    const {username, userID, password, email} = req.body;
+    // Body : username, password, email
+    const {username, password, email} = req.body;
 
     // 빈 값 체크
     if(!email){
@@ -61,7 +61,6 @@ exports.postUsers = async function(req, res){
 
     const signUpResponse = await userService.createUser(
         username,
-        userID,
         password,
         email
     );
