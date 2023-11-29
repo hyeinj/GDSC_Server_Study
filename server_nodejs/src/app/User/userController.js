@@ -83,3 +83,23 @@ exports.postUsers = async function(req, res){
 
     return res.send(loginResponse);
  };
+
+ /**
+ * API No. 4
+ * API Name : 메뉴 조회 API
+ * [GET] /app/menu
+ */
+ exports.getMenu = async function(req, res){
+    // Query String: name
+    const name = req.query.name;
+
+    if(!name){
+        // 메뉴 전체 조회
+        const menuListResult = await userProvider.searchMenuList();
+        return res.send(response(baseResponse.SUCCESS, menuListResult));
+    } else{
+        // 메뉴 검색 조회
+        const menuResultByName = await userProvider.searchMenuList(name);
+        return res.send(response(baseResponse.SUCCESS, menuResultByName));
+    }
+ };
